@@ -15,7 +15,7 @@
 // P.S. Можете стилизовать (используя CSS) ваш список по вашему желанию и фантазии
 
 
-const addAlbumsList = async (url) => {
+const fillAlbumsList = async (url) => {
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -34,5 +34,14 @@ const addAlbumsList = async (url) => {
 }
 
 let url = "https://jsonplaceholder.typicode.com/albums";
+document.querySelector(`body`).innerHTML +=
+    `<style>
+    .album_title::first-letter{
+        text-transform: uppercase;
+        }
+      </style>
+    <p>ALBUMS:</p>
+    <ol id="albums"></ol>`;
 
-addAlbumsList(url);
+
+fillAlbumsList(url);
