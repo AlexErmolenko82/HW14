@@ -39,7 +39,14 @@ const fillAlbumsList = async (url) => {
 }
 
 let url = "https://jsonplaceholder.typicode.com/albums";
-document.querySelector(`body`).innerHTML +=
-    `<p>ALBUMS:</p>
-     <ol id="albums"></ol>`;
+
+let body = document.querySelector(`body`);
+let ol = document.createElement('ol');
+body.prepend(ol);
+ol.id = "albums";
+
+let p = document.createElement('p');
+body.prepend(p);
+p.innerHTML = "ALBUMS";
+
 fillAlbumsList(url);
