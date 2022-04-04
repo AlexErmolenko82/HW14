@@ -14,7 +14,6 @@
 // </ul>
 // P.S. Можете стилизовать (используя CSS) ваш список по вашему желанию и фантазии
 
-
 const fillAlbumsList = async (url) => {
   try {
     const response = await fetch(url);
@@ -22,7 +21,13 @@ const fillAlbumsList = async (url) => {
       throw response;
     } else {
         let array = await response.json();
-        array.forEach(element => {document.querySelector(`#albums`).innerHTML += `<li class="album_title">${element.title}</li>`});
+        let albums = document.querySelector(`#albums`);
+        array.forEach(element => {
+          let list = document.createElement('li');
+          albums.appendChild(list);
+          list.className = "album_title";
+          list.innerHTML = `${element.title}`;
+          });
       }
   } catch (responseError) {
     if (responseError.status === 404) {
@@ -35,13 +40,6 @@ const fillAlbumsList = async (url) => {
 
 let url = "https://jsonplaceholder.typicode.com/albums";
 document.querySelector(`body`).innerHTML +=
-    `<style>
-    .album_title::first-letter{
-        text-transform: uppercase;
-        }
-      </style>
-    <p>ALBUMS:</p>
-    <ol id="albums"></ol>`;
-
-
+    `<p>ALBUMS:</p>
+     <ol id="albums"></ol>`;
 fillAlbumsList(url);
